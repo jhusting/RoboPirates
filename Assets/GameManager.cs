@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private Hv_finalsong_AudioLib pd;
+    private Hv_finalfinalsong_AudioLib pd;
+
+    bool isSpawned = false;
+
+    public GameObject goodShip;
+    public GameObject enemyShip;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        pd = GetComponent<Hv_finalsong_AudioLib>();
+        pd = GetComponent<Hv_finalfinalsong_AudioLib>();
 
         pd.FillTableWithFloatBuffer("strings", new float[] { 1, 40, 45, 50, 55, 59, 64 });
         pd.FillTableWithFloatBuffer("notes", new float[] { 0, 8, 2, 4, 5, 7, 9, 11, 12});
@@ -21,14 +26,29 @@ public class GameManager : MonoBehaviour
         pd.FillTableWithFloatBuffer("melody", new float[] { 0, 402,501 ,503, 503, 503, 600, 601, 601, 603, 600, 603 });
 
 
-        pd.SendEvent(Hv_finalsong_AudioLib.Event.Bang);
+        pd.SendEvent(Hv_finalfinalsong_AudioLib.Event.Bang);
 
-
+        pd.SetFloatParameter(Hv_finalfinalsong_AudioLib.Parameter.Freq, 418);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (isSpawned)
+        {
+
+            var distance = (goodShip.transform.position - enemyShip.transform.position).magnitude;
+            Debug.Log(distance);
+
+            float freq = 209 - (15 - Mathf.Abs((distance - 235))) * 3;
+            pd.SetFloatParameter(Hv_finalfinalsong_AudioLib.Parameter.Freq, freq);
+        }
+    }
+
+    void EnemySpawned()
+    {
+        pd.SetFloatParameter(Hv_finalfinalsong_AudioLib.Parameter.Freq, 209);
+        isSpawned = true;
+
     }
 }

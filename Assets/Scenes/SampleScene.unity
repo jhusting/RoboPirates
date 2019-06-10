@@ -122,8 +122,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1779524}
   - component: {fileID: 1779523}
-  - component: {fileID: 1779525}
   - component: {fileID: 1779522}
+  - component: {fileID: 1779525}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -140,9 +140,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1779521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab6dec30f3f33140aafcee2df398d64, type: 3}
+  m_Script: {fileID: 11500000, guid: ff3af95a28d116d48b42e7cc291576fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  freq: 419
 --- !u!82 &1779523
 AudioSource:
   m_ObjectHideFlags: 0
@@ -260,11 +261,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1779521}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97d6aa6c67970e74ba0abf8e3341b329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goodShip: {fileID: 1588775037}
+  enemyShip: {fileID: 1259695129}
 --- !u!1001 &5804006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1165,6 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324465a96e598e143b5e0acc8080534b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pd: {fileID: 0}
   RegularPlaying: 0
   SawtoothPlaying: 1
   LineDisplayText: {fileID: 521446010}
@@ -2363,7 +2367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
-  speed: 0.01
+  speed: 0
 --- !u!23 &1588775039
 MeshRenderer:
   m_ObjectHideFlags: 0

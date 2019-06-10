@@ -9,7 +9,6 @@ public class Ship : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -20,4 +19,6 @@ public class Ship : MonoBehaviour
         transform.Rotate(rotateAmount);
         transform.position += transform.right * -1 * speed;
     }
+
+    
 }
