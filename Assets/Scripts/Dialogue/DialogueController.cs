@@ -57,7 +57,7 @@ public class DialogueController : MonoBehaviour
         lines.Add(new KeyValuePair<string, float>("pause", .5f)); //16
 
         // SWITCH
-        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: LOOP eRoorRRrrr", 2.5f)); //17
+        //lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: LOOP eRoorRRrrr", 2.5f)); //17
     }
 
     // Update is called once per frame
@@ -120,7 +120,7 @@ public class DialogueController : MonoBehaviour
             CurrTime = 0f;
             PlayLine();
         }
-        if(CurrTime >= BetweenLineDelay)
+        if(CurrTime >= BetweenLineDelay && CurrIndex < lines.Count)
         {
             CurrTime = 0f;
             PlayLine();
@@ -130,6 +130,10 @@ public class DialogueController : MonoBehaviour
     void PlayLine()
     {
         CurrIndex++;
+
+        if (CurrIndex >= lines.Count)
+            return;
+
         if (CurrIndex % 2 == 0)
             SawtoothPlaying = true;
         else
