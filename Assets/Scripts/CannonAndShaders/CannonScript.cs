@@ -107,6 +107,8 @@ public class CannonScript : MonoBehaviour
         Vector3 rot = transform.rotation.eulerAngles;
         rot.y -= 90f;
 
-        Instantiate(CannonBallPrefab, CurrPos, Quaternion.Euler(rot));
+        GameObject part = Instantiate(CannonBallPrefab, CurrPos, Quaternion.Euler(rot)) as GameObject;
+        part.transform.parent = transform;
+        part.transform.localScale = new Vector3(25f, 25f, 25f);
     }
 }
