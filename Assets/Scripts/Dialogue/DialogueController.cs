@@ -8,6 +8,7 @@ public class DialogueController : MonoBehaviour
     public List<KeyValuePair<string, float>> lines = new List<KeyValuePair<string, float>>();
     //public Hv_RoboVoices2_AudioLib pd;
     public Hv_RoboVoices4_AudioLib pd;
+    public GameObject EvilShipGroup;
 
     public bool RegularPlaying = false;
     public bool SawtoothPlaying = true;
@@ -134,6 +135,9 @@ public class DialogueController : MonoBehaviour
         else
             RegularPlaying = true;
 
+        if (CurrIndex == 10)
+            Uncloak();
+
         if (CurrIndex == 10 || CurrIndex == 12 || CurrIndex == 15 || CurrIndex == 17)
             pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Switchbot);
 
@@ -156,5 +160,10 @@ public class DialogueController : MonoBehaviour
         SawtoothPlaying = false;
         DialogueGroup.alpha = 0f;
         LineDisplayText.text = "";
+    }
+
+    void Uncloak()
+    {
+        EvilShipGroup.SetActive(true);
     }
 }
