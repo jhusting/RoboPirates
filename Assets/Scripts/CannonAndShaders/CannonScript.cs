@@ -75,7 +75,7 @@ public class CannonScript : MonoBehaviour
         Vector3 CurrPos = transform.position + (transform.forward * 1.1f * transform.localScale.x);
 
         Vector3 rot = transform.rotation.eulerAngles;
-        rot.z -= 90f;
+        rot.y -= 90f;
 
         Instantiate(CannonBallPrefab, CurrPos, Quaternion.Euler(rot));
     }
