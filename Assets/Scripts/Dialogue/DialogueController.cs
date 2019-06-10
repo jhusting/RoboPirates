@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DialogueController : MonoBehaviour
 {
     public List<KeyValuePair<string, float>> lines = new List<KeyValuePair<string, float>>();
+    //public Hv_RoboVoices2_AudioLib pd;
 
     public bool RegularPlaying = false;
     public bool SawtoothPlaying = true;
@@ -20,10 +21,16 @@ public class DialogueController : MonoBehaviour
     private float CurrTime = 0f;
     private int CurrIndex = 0;
     private float PauseTime = 0f;
+    private float EaseTime = 0.1f;
+    private float CurrEaseTime = 0f;
+    private bool bEaseIn = false;
+    private bool bEaseOut = false;
+    private float CurrVol = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        //pd.SetFloatParameter(Hv_RoboVoices2_AudioLib.Parameter.Volume, 0f);
         lines.Add(new KeyValuePair<string, float>("pause", 2.5f)); //0
 
         lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: OH TO SAIL THE HIGH C’S", 2.5f)); //1
@@ -38,23 +45,45 @@ public class DialogueController : MonoBehaviour
         lines.Add(new KeyValuePair<string, float>("<XXXXXX------------------------------------->", 2f)); //9
         //lines.Add(new KeyValuePair<string, float>("pause", 2.5f)); //10
 
-        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: UNCLOAK.EXE", 1.75f)); //5
-        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: FIRE AT WILL", 2.5f)); //5
+        // SWITCH
+        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: UNCLOAK.EXE", 1.75f)); //10
+        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: FIRE AT WILL", 2.5f)); //11
 
-        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: THE SAWTOOTH GANG! THOSE BETA BOTS ARE NOTHING BUT BAD PROTOTYPES", 6f)); //10
-        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: FIRE BACK", 1.75f)); //10
-        lines.Add(new KeyValuePair<string, float>("pause", .5f)); //10
+        // SWITCH
+        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: THE SAWTOOTH GANG! THOSE BETA BOTS ARE NOTHING BUT BAD PROTOTYPES", 6f)); //12
+        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: FIRE BACK", 1.75f)); //13
+        lines.Add(new KeyValuePair<string, float>("pause", .5f)); //14
 
-        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: ALWAYS AN UPDATE BEHIND, EFFEM", 3.5f)); //5
-        lines.Add(new KeyValuePair<string, float>("pause", .5f)); //10
+        // SWITCH
+        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: ALWAYS AN UPDATE BEHIND, EFFEM", 3.5f)); //15
+        lines.Add(new KeyValuePair<string, float>("pause", .5f)); //16
 
-        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: LOOP eRoorRRrrr", 2.5f)); //10
+        // SWITCH
+        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: LOOP eRoorRRrrr", 2.5f)); //17
     }
 
     // Update is called once per frame
     void Update()
     {
         CurrTime += Time.deltaTime;
+
+        if (bEaseIn)
+        {
+            CurrVol = Mathf.Clamp(CurrVol + 0.1f, 0.1f, 1f);
+            //pd.SetFloatParameter(Hv_RoboVoices2_AudioLib.Parameter.Volume, CurrVol);
+
+            if (CurrVol >= 1f)
+                bEaseIn = false;
+        }
+
+        if (bEaseOut)
+        {
+            CurrVol = Mathf.Clamp(CurrVol - 0.1f, 0.01f, 1f);
+            //pd.SetFloatParameter(Hv_RoboVoices2_AudioLib.Parameter.Volume, CurrVol);
+
+            if (CurrVol <= 0.01f)
+                bEaseOut = false;
+        }
 
         if (bPause)
         {
@@ -94,6 +123,8 @@ public class DialogueController : MonoBehaviour
                     DialogueGroup.alpha = 0f;
                     LineDisplayText.text = "";
                 }
+                else if (CurrTime >= kvp.Value * 0.8f)
+                    bEaseOut = true;
             }
         }
         else
@@ -105,7 +136,7 @@ public class DialogueController : MonoBehaviour
 
     void CheckDelay()
     {
-        if(CurrIndex > 5 && CurrIndex < 10)
+        if(CurrIndex > 5 && CurrIndex < 11)
         {
             CurrTime = 0f;
             PlayLine();
@@ -125,11 +156,16 @@ public class DialogueController : MonoBehaviour
         else
             RegularPlaying = true;
 
+        //if (CurrIndex == 10 || CurrIndex == 12 || CurrIndex == 15 || CurrIndex == 17)
+            //pd.SendEvent(Hv_RoboVoices2_AudioLib.Event.Switchbot);
 
         KeyValuePair<string, float> kvp = lines[CurrIndex];
 
         if (!kvp.Key.Equals("pause"))
+        {
             DialogueGroup.alpha = 1f;
+            bEaseIn = true;
+        }
     }
 
     void Pause(float x)
