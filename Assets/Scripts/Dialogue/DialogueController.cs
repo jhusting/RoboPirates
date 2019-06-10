@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class DialogueController : MonoBehaviour
 {
     public List<KeyValuePair<string, float>> lines = new List<KeyValuePair<string, float>>();
+    //public Hv_RoboVoices2_AudioLib pd;
+    public Hv_RoboVoices4_AudioLib pd;
 
     public bool RegularPlaying = false;
     public bool SawtoothPlaying = true;
@@ -24,6 +26,8 @@ public class DialogueController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //pd.SetFloatParameter(Hv_RoboVoices2_AudioLib.Parameter.Volume, 0f);
+        pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Toggleonoff);
         lines.Add(new KeyValuePair<string, float>("pause", 2.5f)); //0
 
         lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: OH TO SAIL THE HIGH C’S", 2.5f)); //1
@@ -38,17 +42,21 @@ public class DialogueController : MonoBehaviour
         lines.Add(new KeyValuePair<string, float>("<XXXXXX------------------------------------->", 2f)); //9
         //lines.Add(new KeyValuePair<string, float>("pause", 2.5f)); //10
 
-        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: UNCLOAK.EXE", 1.75f)); //5
-        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: FIRE AT WILL", 2.5f)); //5
+        // SWITCH
+        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: UNCLOAK.EXE", 1.75f)); //10
+        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: FIRE AT WILL", 2.5f)); //11
 
-        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: THE SAWTOOTH GANG! THOSE BETA BOTS ARE NOTHING BUT BAD PROTOTYPES", 6f)); //10
-        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: FIRE BACK", 1.75f)); //10
-        lines.Add(new KeyValuePair<string, float>("pause", .5f)); //10
+        // SWITCH
+        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: THE SAWTOOTH GANG! THOSE BETA BOTS ARE NOTHING BUT BAD PROTOTYPES", 6f)); //12
+        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: FIRE BACK", 1.75f)); //13
+        lines.Add(new KeyValuePair<string, float>("pause", .5f)); //14
 
-        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: ALWAYS AN UPDATE BEHIND, EFFEM", 3.5f)); //5
-        lines.Add(new KeyValuePair<string, float>("pause", .5f)); //10
+        // SWITCH
+        lines.Add(new KeyValuePair<string, float>("Sawtooth Sigmoid: ALWAYS AN UPDATE BEHIND, EFFEM", 3.5f)); //15
+        lines.Add(new KeyValuePair<string, float>("pause", .5f)); //16
 
-        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: LOOP eRoorRRrrr", 2.5f)); //10
+        // SWITCH
+        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: LOOP eRoorRRrrr", 2.5f)); //17
     }
 
     // Update is called once per frame
@@ -93,6 +101,7 @@ public class DialogueController : MonoBehaviour
                     RegularPlaying = false;
                     DialogueGroup.alpha = 0f;
                     LineDisplayText.text = "";
+                    pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Toggleonoff);
                 }
             }
         }
@@ -105,7 +114,7 @@ public class DialogueController : MonoBehaviour
 
     void CheckDelay()
     {
-        if(CurrIndex > 5 && CurrIndex < 10)
+        if(CurrIndex > 5 && CurrIndex < 11)
         {
             CurrTime = 0f;
             PlayLine();
@@ -125,11 +134,16 @@ public class DialogueController : MonoBehaviour
         else
             RegularPlaying = true;
 
+        if (CurrIndex == 10 || CurrIndex == 12 || CurrIndex == 15 || CurrIndex == 17)
+            pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Switchbot);
 
         KeyValuePair<string, float> kvp = lines[CurrIndex];
 
         if (!kvp.Key.Equals("pause"))
+        {
             DialogueGroup.alpha = 1f;
+            pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Toggleonoff);
+        }
     }
 
     void Pause(float x)
