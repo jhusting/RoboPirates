@@ -1,0 +1,198 @@
+fileFormatVersion: 2
+guid: c99280552fad95d41b35c4f9f6673dcd
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: BeakBase
+    100002: BeakBot1
+    100004: BeakBot2
+    100006: BeakBot3
+    100008: BeakTop1
+    100010: BeakTop2
+    100012: BeakTop3
+    100014: //RootNode
+    100016: BirdMesh
+    100018: BirdRig
+    100020: Chest
+    100022: Foot_L
+    100024: Foot_R
+    100026: Head
+    100028: Hip
+    100030: Leg_L1
+    100032: Leg_L2
+    100034: Leg_R1
+    100036: Leg_R2
+    100038: Neck
+    100040: Tail_1
+    100042: Tail_2
+    100044: Tail_3
+    100046: Toe_L1
+    100048: Toe_L2
+    100050: Toe_L3
+    100052: Toe_R1
+    100054: Toe_R2
+    100056: Toe_R3
+    100058: Wing_L1
+    100060: Wing_L2
+    100062: Wing_L3
+    100064: Wing_L4
+    100066: Wing_R1
+    100068: Wing_R2
+    100070: Wing_R3
+    100072: Wing_R4
+    400000: BeakBase
+    400002: BeakBot1
+    400004: BeakBot2
+    400006: BeakBot3
+    400008: BeakTop1
+    400010: BeakTop2
+    400012: BeakTop3
+    400014: //RootNode
+    400016: BirdMesh
+    400018: BirdRig
+    400020: Chest
+    400022: Foot_L
+    400024: Foot_R
+    400026: Head
+    400028: Hip
+    400030: Leg_L1
+    400032: Leg_L2
+    400034: Leg_R1
+    400036: Leg_R2
+    400038: Neck
+    400040: Tail_1
+    400042: Tail_2
+    400044: Tail_3
+    400046: Toe_L1
+    400048: Toe_L2
+    400050: Toe_L3
+    400052: Toe_R1
+    400054: Toe_R2
+    400056: Toe_R3
+    400058: Wing_L1
+    400060: Wing_L2
+    400062: Wing_L3
+    400064: Wing_L4
+    400066: Wing_R1
+    400068: Wing_R2
+    400070: Wing_R3
+    400072: Wing_R4
+    2100000: lambert1
+    4300000: BirdMesh
+    7400000: bird_flyIdle
+    9500000: //RootNode
+    13700000: BirdMesh
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: bird_flyIdle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
