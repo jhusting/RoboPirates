@@ -7,6 +7,7 @@ public class DialogueController : MonoBehaviour
 {
     public List<KeyValuePair<string, float>> lines = new List<KeyValuePair<string, float>>();
     //public Hv_RoboVoices2_AudioLib pd;
+    public Hv_RoboVoices4_AudioLib pd;
 
     public bool RegularPlaying = false;
     public bool SawtoothPlaying = true;
@@ -21,16 +22,12 @@ public class DialogueController : MonoBehaviour
     private float CurrTime = 0f;
     private int CurrIndex = 0;
     private float PauseTime = 0f;
-    private float EaseTime = 0.1f;
-    private float CurrEaseTime = 0f;
-    private bool bEaseIn = false;
-    private bool bEaseOut = false;
-    private float CurrVol = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
         //pd.SetFloatParameter(Hv_RoboVoices2_AudioLib.Parameter.Volume, 0f);
+        pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Toggleonoff);
         lines.Add(new KeyValuePair<string, float>("pause", 2.5f)); //0
 
         lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: OH TO SAIL THE HIGH C’S", 2.5f)); //1
@@ -66,24 +63,6 @@ public class DialogueController : MonoBehaviour
     void Update()
     {
         CurrTime += Time.deltaTime;
-
-        if (bEaseIn)
-        {
-            CurrVol = Mathf.Clamp(CurrVol + 0.1f, 0.1f, 1f);
-            //pd.SetFloatParameter(Hv_RoboVoices2_AudioLib.Parameter.Volume, CurrVol);
-
-            if (CurrVol >= 1f)
-                bEaseIn = false;
-        }
-
-        if (bEaseOut)
-        {
-            CurrVol = Mathf.Clamp(CurrVol - 0.1f, 0.01f, 1f);
-            //pd.SetFloatParameter(Hv_RoboVoices2_AudioLib.Parameter.Volume, CurrVol);
-
-            if (CurrVol <= 0.01f)
-                bEaseOut = false;
-        }
 
         if (bPause)
         {
@@ -122,9 +101,8 @@ public class DialogueController : MonoBehaviour
                     RegularPlaying = false;
                     DialogueGroup.alpha = 0f;
                     LineDisplayText.text = "";
+                    pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Toggleonoff);
                 }
-                else if (CurrTime >= kvp.Value * 0.8f)
-                    bEaseOut = true;
             }
         }
         else
@@ -156,15 +134,15 @@ public class DialogueController : MonoBehaviour
         else
             RegularPlaying = true;
 
-        //if (CurrIndex == 10 || CurrIndex == 12 || CurrIndex == 15 || CurrIndex == 17)
-            //pd.SendEvent(Hv_RoboVoices2_AudioLib.Event.Switchbot);
+        if (CurrIndex == 10 || CurrIndex == 12 || CurrIndex == 15 || CurrIndex == 17)
+            pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Switchbot);
 
         KeyValuePair<string, float> kvp = lines[CurrIndex];
 
         if (!kvp.Key.Equals("pause"))
         {
             DialogueGroup.alpha = 1f;
-            bEaseIn = true;
+            pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Toggleonoff);
         }
     }
 
