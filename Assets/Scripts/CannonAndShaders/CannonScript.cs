@@ -15,15 +15,20 @@ public class CannonScript : MonoBehaviour
 
     private float currLifeTime = 0f;
     private bool bCanFire = true;
+
+    Vector3 defaultScale;
     // Start is called before the first frame update
     void Start()
     {
+        defaultScale = transform.localScale;
+        StartCoroutine(CannonRoutine());
         
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if(!bCanFire)
         {
             currLifeTime += Time.deltaTime;
@@ -49,20 +54,45 @@ public class CannonScript : MonoBehaviour
             Debug.Log(total);
 
         if (total > Sensitivity && bCanFire)
-            FireCannon();*/
-
-        if (bCanFire)
             FireCannon();
 
+        if (bCanFire)
+            StartCoroutine(CannonRoutine());
+        */
     }
 
+    IEnumerator CannonRoutine()
+    {
+        while (true)
+        {
+            if (Random.Range(0, 10) < 4f)
+            {
+                FireCannon();
+                var rout = StartCoroutine(SquashAndSquishRoutine());
+                yield return new WaitForSeconds(1f);
+                StopCoroutine(rout);
+                
+            }
+            yield return new WaitForSeconds(Random.Range(2, 6));
+        }
+    }
+
+    IEnumerator SquashAndSquishRoutine()
+    {
+        while (true)
+        {
+            SquashAndSquish();
+            yield return null;
+        }
+    }
     void SquashAndSquish()
     {
+        currLifeTime += Time.deltaTime;
         Vector3 CurrScale = transform.localScale;
 
-        CurrScale.x = 1f + LongCurve.Evaluate(currLifeTime / CoolDown);
-        CurrScale.y = 1f - LongCurve.Evaluate(currLifeTime / CoolDown);
-        CurrScale.z = 1f + LongCurve.Evaluate(currLifeTime / CoolDown);
+        CurrScale.x = defaultScale.x + LongCurve.Evaluate(currLifeTime / CoolDown);
+        CurrScale.y = defaultScale.y - LongCurve.Evaluate(currLifeTime / CoolDown);
+        CurrScale.z = defaultScale.z + LongCurve.Evaluate(currLifeTime / CoolDown);
 
         transform.localScale = CurrScale;
     }
