@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    int posSpeed = 20;
+    int posSpeed = 1;
     public Camera playerCam;
 
     void Start()
@@ -42,22 +42,23 @@ public class PlayerScript : MonoBehaviour
         //Sprint Modifier
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            posSpeed = 40;
+            posSpeed = 10;
         }
         else
         {
-            posSpeed = 20;
+            posSpeed = 5;
         }
         //Jump
         if (Input.GetKey(KeyCode.Space))
         {
-            transform.Translate(Vector3.up * 30 * Time.deltaTime);
+            transform.Translate(Vector3.up * 10 * Time.deltaTime);
         }
-        //Fall
-        if (Input.GetKey(KeyCode.LeftControl))
+        else if (Input.GetKey(KeyCode.LeftControl)) //Fall
         {
-            transform.Translate(Vector3.down * 30 * Time.deltaTime);
+            transform.Translate(Vector3.down * 10 * Time.deltaTime);
         }
+        else
+            transform.Translate(Vector3.down * 5 * Time.deltaTime);
     }
 }
 
