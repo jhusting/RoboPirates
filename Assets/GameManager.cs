@@ -30,10 +30,12 @@ public class GameManager : MonoBehaviour
 
         pd.SetFloatParameter(Hv_finalfinalsong_AudioLib.Parameter.Freq, 418);
 
-        var comps = GetComponentsInChildren<CannonScript>();
+        var comps = goodShip.GetComponentsInChildren<CannonScript>();
         foreach (var cmp in comps)
         {
             cmp.enabled = false;
+            Debug.Log("SET FALSE");
+            
         }
     }
 
@@ -46,12 +48,12 @@ public class GameManager : MonoBehaviour
             var distance = (goodShip.transform.position - enemyShip.transform.position).magnitude;
             Debug.Log(distance);
 
-            float freq = 209 - (15 - Mathf.Abs((distance - 235))) * 3;
+            float freq = 209 - (5 - Mathf.Abs((distance - 25))) * 3;
             pd.SetFloatParameter(Hv_finalfinalsong_AudioLib.Parameter.Freq, freq);
         }
     }
 
-    void EnemySpawned()
+    public void EnemySpawned()
     {
         var comps = GetComponentsInChildren<CannonScript>();
         foreach (var cmp in comps)

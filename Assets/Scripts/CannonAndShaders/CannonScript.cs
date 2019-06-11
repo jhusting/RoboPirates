@@ -65,13 +65,16 @@ public class CannonScript : MonoBehaviour
     {
         while (true)
         {
-            if (Random.Range(0, 10) < 4f)
+            if (enabled)
             {
-                FireCannon();
-                var rout = StartCoroutine(SquashAndSquishRoutine());
-                yield return new WaitForSeconds(1f);
-                StopCoroutine(rout);
-                
+                if (Random.Range(0, 10) < 4f)
+                {
+                    FireCannon();
+                    var rout = StartCoroutine(SquashAndSquishRoutine());
+                    yield return new WaitForSeconds(1f);
+                    StopCoroutine(rout);
+
+                }
             }
             yield return new WaitForSeconds(Random.Range(2, 6));
         }
@@ -99,6 +102,7 @@ public class CannonScript : MonoBehaviour
 
     void FireCannon()
     {
+
         bCanFire = false;
         currLifeTime = 0f;
 

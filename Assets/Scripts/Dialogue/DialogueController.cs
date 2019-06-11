@@ -169,5 +169,6 @@ public class DialogueController : MonoBehaviour
     void Uncloak()
     {
         EvilShipGroup.SetActive(true);
+        FindObjectOfType<GameManager>().EnemySpawned();
     }
 }
