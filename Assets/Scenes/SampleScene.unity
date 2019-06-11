@@ -266,6 +266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d6aa6c67970e74ba0abf8e3341b329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goodShip: {fileID: 0}
+  enemyShip: {fileID: 0}
 --- !u!114 &1779526
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,6 +29,12 @@ public class GameManager : MonoBehaviour
         pd.SendEvent(Hv_finalfinalsong_AudioLib.Event.Bang);
 
         pd.SetFloatParameter(Hv_finalfinalsong_AudioLib.Parameter.Freq, 418);
+
+        var comps = GetComponentsInChildren<CannonScript>();
+        foreach (var cmp in comps)
+        {
+            cmp.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -47,6 +53,12 @@ public class GameManager : MonoBehaviour
 
     void EnemySpawned()
     {
+        var comps = GetComponentsInChildren<CannonScript>();
+        foreach (var cmp in comps)
+        {
+            cmp.enabled = true;
+        }
+
         pd.SetFloatParameter(Hv_finalfinalsong_AudioLib.Parameter.Freq, 209);
         isSpawned = true;
 

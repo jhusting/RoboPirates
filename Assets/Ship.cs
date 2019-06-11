@@ -18,6 +18,7 @@ public class Ship : MonoBehaviour
         rotateAmount -= 1.5f * rotateAmount;
         transform.Rotate(rotateAmount);
         transform.position += transform.right * -1 * speed;
+        
     }
 
     
