@@ -1172,6 +1172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pd: {fileID: 658477606}
   EvilShipGroup: {fileID: 1259695129}
+  GoodBot: {fileID: 1261770976}
   RegularPlaying: 0
   SawtoothPlaying: 1
   LineDisplayText: {fileID: 521446010}

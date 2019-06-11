@@ -9,6 +9,7 @@ public class DialogueController : MonoBehaviour
     //public Hv_RoboVoices2_AudioLib pd;
     public Hv_RoboVoices4_AudioLib pd;
     public GameObject EvilShipGroup;
+    public GameObject GoodBot;
 
     public bool RegularPlaying = false;
     public bool SawtoothPlaying = true;
@@ -57,7 +58,7 @@ public class DialogueController : MonoBehaviour
         lines.Add(new KeyValuePair<string, float>("pause", .5f)); //16
 
         // SWITCH
-        //lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: LOOP eRoorRRrrr", 2.5f)); //17
+        lines.Add(new KeyValuePair<string, float>("BitCaptain Effem: LOOP eRoorRRrrr", 2.5f)); //17
     }
 
     // Update is called once per frame
@@ -115,12 +116,12 @@ public class DialogueController : MonoBehaviour
 
     void CheckDelay()
     {
-        if(CurrIndex > 5 && CurrIndex < 11)
+        if (CurrIndex > 5 && CurrIndex < 11)
         {
             CurrTime = 0f;
             PlayLine();
         }
-        if(CurrTime >= BetweenLineDelay && CurrIndex < lines.Count)
+        if (CurrTime >= BetweenLineDelay && CurrIndex < lines.Count)
         {
             CurrTime = 0f;
             PlayLine();
@@ -141,6 +142,9 @@ public class DialogueController : MonoBehaviour
 
         if (CurrIndex == 10)
             Uncloak();
+
+        if (CurrIndex == 17)
+            KillBot();
 
         if (CurrIndex == 10 || CurrIndex == 12 || CurrIndex == 15 || CurrIndex == 17)
             pd.SendEvent(Hv_RoboVoices4_AudioLib.Event.Switchbot);
@@ -170,5 +174,10 @@ public class DialogueController : MonoBehaviour
     {
         EvilShipGroup.SetActive(true);
         FindObjectOfType<GameManager>().EnemySpawned();
+    }
+
+    void KillBot()
+    {
+        GoodBot.SetActive(false);
     }
 }
