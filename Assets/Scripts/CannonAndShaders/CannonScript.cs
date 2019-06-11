@@ -17,12 +17,19 @@ public class CannonScript : MonoBehaviour
     private bool bCanFire = true;
 
     Vector3 defaultScale;
+
+    public AudioClip clip;
     // Start is called before the first frame update
     void Start()
     {
         defaultScale = transform.localScale;
         StartCoroutine(CannonRoutine());
         
+        //var pd = GetComponent<Hv_151Finalfinalfinal_AudioLib>();
+        //pd.FillTableWithMonoAudioClip("PDTable", clip);
+        //pd.SetFloatParameter(Hv_151Finalfinalfinal_AudioLib.Parameter.Frequency, 1);
+
+
     }
 
     // Update is called once per frame
@@ -112,6 +119,12 @@ public class CannonScript : MonoBehaviour
         rot.y -= 90f;
 
         GameObject part = Instantiate(CannonBallPrefab, CurrPos, Quaternion.Euler(rot)) as GameObject;
+
+
+
+        //var pd = GetComponent<Hv_canon_AudioLib>();
+        //pd.SendEvent(Hv_canon_AudioLib.Event.Bang);
+
         //GameObject part = Instantiate(CannonBallPrefab, transform);
         //part.transform.parent = transform;
         //part.transform.localScale = new Vector3(25f, 25f, 25f);
